@@ -105,40 +105,38 @@ vulnTabButton.Parent = tabButtons
 vulnTabButton.Position = UDim2.new(0.5, 5, 0, 0)
 vulnTabButton.Text = "VULN"
 
--- Styles Tab
+-- Styles Tab (6 botões 2x3)
 local stylesTab = Instance.new("Frame")
 stylesTab.Parent = mainFrame
 stylesTab.Size = UDim2.new(1, -20, 1, -90)
 stylesTab.Position = UDim2.new(0, 10, 0, 85)
 stylesTab.BackgroundTransparency = 1
 
-local masterStyleBtn = Instance.new("TextButton")
-masterStyleBtn.Parent = stylesTab
-masterStyleBtn.Size = UDim2.new(1, 0, 0, 40)
-masterStyleBtn.Position = UDim2.new(0, 0, 0, 0)
-masterStyleBtn.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
-masterStyleBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-masterStyleBtn.Font = Enum.Font.GothamBold
-masterStyleBtn.TextSize = 20
-masterStyleBtn.Text = "Master Style"
-Instance.new("UICorner", masterStyleBtn).CornerRadius = UDim.new(0, 10)
+local function createStyleButton(name, style, row, column)
+    local btn = Instance.new("TextButton")
+    btn.Parent = stylesTab
+    btn.Size = UDim2.new(0.5, -10, 0, 40)
+    btn.Position = UDim2.new((column - 1) * 0.5 + 0.01 * (column - 1), 0, 0, (row - 1) * 50)
+    btn.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
+    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btn.Font = Enum.Font.GothamBold
+    btn.TextSize = 20
+    btn.Text = name
+    Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 10)
 
-masterStyleBtn.MouseButton1Click:Connect(function()
-    pcall(function()
-        LocalPlayer.PlayerStats.Style.Value = "Loki"
+    btn.MouseButton1Click:Connect(function()
+        pcall(function()
+            LocalPlayer.PlayerStats.Style.Value = style
+        end)
     end)
-end)
+end
 
-local kingStyleBtn = masterStyleBtn:Clone()
-kingStyleBtn.Parent = stylesTab
-kingStyleBtn.Position = UDim2.new(0, 0, 0, 50)
-kingStyleBtn.Text = "King Style"
-
-kingStyleBtn.MouseButton1Click:Connect(function()
-    pcall(function()
-        LocalPlayer.PlayerStats.Style.Value = "King"
-    end)
-end)
+createStyleButton("Master Style", "Loki", 1, 1)
+createStyleButton("King Style", "King", 1, 2)
+createStyleButton("Snake Style", "Aiku", 2, 1)
+createStyleButton("Genius Style", "Sae", 2, 2)
+createStyleButton("Destroyer Style", "NEL Rin", 3, 1)
+createStyleButton("Zombie Style", "Don Lorenzo", 3, 2)
 
 -- VULN Tab
 local vulnTab = Instance.new("Frame")
@@ -148,10 +146,7 @@ vulnTab.Position = stylesTab.Position
 vulnTab.BackgroundTransparency = 1
 vulnTab.Visible = false
 
--- No Cooldown
-local noCooldown = false
-local noCooldownConnection = nil
-
+-- No Cooldown (executa só uma vez, sem toggle)
 local noCooldownBtn = Instance.new("TextButton")
 noCooldownBtn.Parent = vulnTab
 noCooldownBtn.Size = UDim2.new(1, 0, 0, 40)
@@ -160,31 +155,37 @@ noCooldownBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
 noCooldownBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 noCooldownBtn.Font = Enum.Font.GothamBold
 noCooldownBtn.TextSize = 20
-noCooldownBtn.Text = "No Cooldown [OFF]"
+noCooldownBtn.Text = "No Cooldown"
+
 Instance.new("UICorner", noCooldownBtn).CornerRadius = UDim.new(0, 10)
 
+local noCooldownActivated = false
+
 noCooldownBtn.MouseButton1Click:Connect(function()
-    noCooldown = not noCooldown
-    if noCooldown then
-        noCooldownBtn.Text = "No Cooldown [ON]"
-        noCooldownBtn.BackgroundColor3 = Color3.fromRGB(50, 200, 50)
-        noCooldownConnection = RunService.Heartbeat:Connect(function()
-            pcall(function()
-                for _, v in pairs(LocalPlayer:GetDescendants()) do
-                    if v:IsA("NumberValue") and string.lower(v.Name):find("cooldown") then
-                        v.Value = 0
+    if noCooldownActivated then return end
+    noCooldownActivated = true
+
+    for i,v in pairs(getgc(true)) do
+        if typeof(v) == "table" then
+            for key,value in pairs(v) do
+                if tostring(key):lower():find("cooldown") then
+                    if typeof(value) == "number" and value > 0 then
+                        v[key] = 0
+                        print("Cooldown zerado:", key)
+                    end
+                    if typeof(value) == "function" then
+                        v[key] = function(...) return 0 end
                     end
                 end
-            end)
-        end)
-    else
-        noCooldownBtn.Text = "No Cooldown [OFF]"
-        noCooldownBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
-        if noCooldownConnection then
-            noCooldownConnection:Disconnect()
-            noCooldownConnection = nil
+            end
         end
     end
+
+    game.StarterGui:SetCore("SendNotification",{
+        Title = "soyguhMOD";
+        Text = "Bypass Cooldown Ativado!";
+        Duration = 3;
+    })
 end)
 
 -- Inf Stamina
