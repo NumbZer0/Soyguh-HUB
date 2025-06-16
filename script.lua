@@ -295,8 +295,8 @@ noCooldownBtn.MouseButton1Click:Connect(function()
     end  
 
     game.StarterGui:SetCore("SendNotification",{  
-        Title = "soyguhMOD";  
-        Text = "Bypass Cooldown Ativado!";  
+        Title = "Emperor Hub";  
+        Text = "Cooldown de Skills Desativados 😈!";  
         Duration = 3;  
     })
 end)
