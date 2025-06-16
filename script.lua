@@ -175,6 +175,7 @@ createStyleV2Button("NEL Bachira", "NEL Bachira", 1, 2)
 createStyleV2Button("Kaiser", "Kaiser", 2, 1)
 createStyleV2Button("NEL Isagi", "NEL Isagi", 2, 2)
 createStyleV2Button("Kurona", "Kurona", 3, 1)
+createStyleV2Button("Shidou", "Shidou", 3, 2) -- 🔥 Adicionado
 
 -- VULN Tab
 local vulnTab = Instance.new("Frame")
