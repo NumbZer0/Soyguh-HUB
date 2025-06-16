@@ -5,12 +5,12 @@ local LocalPlayer = Players.LocalPlayer
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
 -- Remove UI antiga
-local oldGui = PlayerGui:FindFirstChild("Emperor Hub")
+local oldGui = PlayerGui:FindFirstChild("soyguhMOD")
 if oldGui then oldGui:Destroy() end
 
 -- ScreenGui
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "Emperor Hub"
+screenGui.Name = "soyguhMOD"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = PlayerGui
 
@@ -159,19 +159,19 @@ stylesTabButton.Font = Enum.Font.GothamBold
 stylesTabButton.TextSize = 18
 Instance.new("UICorner", stylesTabButton).CornerRadius = UDim.new(0, 15)
 
-local stylesV2TabButton = stylesTabButton:Clone()
-stylesV2TabButton.Parent = tabButtons
-stylesV2TabButton.Position = UDim2.new(0.66, 10, 0, 0)
-stylesV2TabButton.Text = "Estilos V2"
-local stylesV2UICorner = stylesV2TabButton:FindFirstChildWhichIsA("UICorner")
-if stylesV2UICorner then stylesV2UICorner.CornerRadius = UDim.new(0, 15) end
-
 local vulnTabButton = stylesTabButton:Clone()
 vulnTabButton.Parent = tabButtons
 vulnTabButton.Position = UDim2.new(0.33, 5, 0, 0)
 vulnTabButton.Text = "Jogador"
 local vulnUICorner = vulnTabButton:FindFirstChildWhichIsA("UICorner")
 if vulnUICorner then vulnUICorner.CornerRadius = UDim.new(0, 15) end
+
+local stylesV2TabButton = stylesTabButton:Clone()
+stylesV2TabButton.Parent = tabButtons
+stylesV2TabButton.Position = UDim2.new(0.66, 10, 0, 0)
+stylesV2TabButton.Text = "Estilos V2"
+local stylesV2UICorner = stylesV2TabButton:FindFirstChildWhichIsA("UICorner")
+if stylesV2UICorner then stylesV2UICorner.CornerRadius = UDim.new(0, 15) end
 
 -- Styles Tab
 local stylesTab = Instance.new("Frame")
@@ -416,4 +416,3 @@ makeDraggable(mainFrame)
 makeDraggable(toggleFrame)
 
 updateToggle()
-
