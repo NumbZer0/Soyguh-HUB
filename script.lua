@@ -91,7 +91,7 @@ tabButtons.BackgroundTransparency = 1
 
 local stylesTabButton = Instance.new("TextButton")
 stylesTabButton.Parent = tabButtons
-stylesTabButton.Size = UDim2.new(0.5, -5, 1, 0)
+stylesTabButton.Size = UDim2.new(0.33, -5, 1, 0)
 stylesTabButton.Position = UDim2.new(0, 0, 0, 0)
 stylesTabButton.Text = "Styles"
 stylesTabButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
@@ -102,10 +102,15 @@ Instance.new("UICorner", stylesTabButton).CornerRadius = UDim.new(0, 8)
 
 local vulnTabButton = stylesTabButton:Clone()
 vulnTabButton.Parent = tabButtons
-vulnTabButton.Position = UDim2.new(0.5, 5, 0, 0)
+vulnTabButton.Position = UDim2.new(0.33, 5, 0, 0)
 vulnTabButton.Text = "VULN"
 
--- Styles Tab (6 botões 2x3)
+local stylesV2TabButton = stylesTabButton:Clone()
+stylesV2TabButton.Parent = tabButtons
+stylesV2TabButton.Position = UDim2.new(0.66, 10, 0, 0)
+stylesV2TabButton.Text = "Styles V2"
+
+-- Styles Tab
 local stylesTab = Instance.new("Frame")
 stylesTab.Parent = mainFrame
 stylesTab.Size = UDim2.new(1, -20, 1, -90)
@@ -131,12 +136,45 @@ local function createStyleButton(name, style, row, column)
     end)
 end
 
-createStyleButton("Master Style", "Loki", 1, 1)
-createStyleButton("King Style", "King", 1, 2)
-createStyleButton("Snake Style", "Aiku", 2, 1)
-createStyleButton("Genius Style", "Sae", 2, 2)
-createStyleButton("Destroyer Style", "NEL Rin", 3, 1)
-createStyleButton("Zombie Style", "Don Lorenzo", 3, 2)
+createStyleButton("Loki", "Loki", 1, 1)
+createStyleButton("Barou", "King", 1, 2)
+createStyleButton("Aiku", "Aiku", 2, 1)
+createStyleButton("Sae", "Sae", 2, 2)
+createStyleButton("Rin", "NEL Rin", 3, 1)
+createStyleButton("Don Lorenzo", "Don Lorenzo", 3, 2)
+
+-- Styles V2 Tab
+local stylesV2Tab = Instance.new("Frame")
+stylesV2Tab.Parent = mainFrame
+stylesV2Tab.Size = stylesTab.Size
+stylesV2Tab.Position = stylesTab.Position
+stylesV2Tab.BackgroundTransparency = 1
+stylesV2Tab.Visible = false
+
+local function createStyleV2Button(name, style, row, column)
+    local btn = Instance.new("TextButton")
+    btn.Parent = stylesV2Tab
+    btn.Size = UDim2.new(0.5, -10, 0, 40)
+    btn.Position = UDim2.new((column - 1) * 0.5 + 0.01 * (column - 1), 0, 0, (row - 1) * 50)
+    btn.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
+    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btn.Font = Enum.Font.GothamBold
+    btn.TextSize = 20
+    btn.Text = name
+    Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 10)
+
+    btn.MouseButton1Click:Connect(function()
+        pcall(function()
+            LocalPlayer.PlayerStats.Style.Value = style
+        end)
+    end)
+end
+
+createStyleV2Button("Kunigami", "Kunigami", 1, 1)
+createStyleV2Button("NEL Bachira", "NEL Bachira", 1, 2)
+createStyleV2Button("Kaiser", "Kaiser", 2, 1)
+createStyleV2Button("NEL Isagi", "NEL Isagi", 2, 2)
+createStyleV2Button("Kurona", "Kurona", 3, 1)
 
 -- VULN Tab
 local vulnTab = Instance.new("Frame")
@@ -146,7 +184,7 @@ vulnTab.Position = stylesTab.Position
 vulnTab.BackgroundTransparency = 1
 vulnTab.Visible = false
 
--- No Cooldown (executa só uma vez, sem toggle)
+-- No Cooldown
 local noCooldownBtn = Instance.new("TextButton")
 noCooldownBtn.Parent = vulnTab
 noCooldownBtn.Size = UDim2.new(1, 0, 0, 40)
@@ -156,7 +194,6 @@ noCooldownBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 noCooldownBtn.Font = Enum.Font.GothamBold
 noCooldownBtn.TextSize = 20
 noCooldownBtn.Text = "No Cooldown"
-
 Instance.new("UICorner", noCooldownBtn).CornerRadius = UDim.new(0, 10)
 
 local noCooldownActivated = false
@@ -230,15 +267,28 @@ end)
 stylesTabButton.MouseButton1Click:Connect(function()
     stylesTab.Visible = true
     vulnTab.Visible = false
+    stylesV2Tab.Visible = false
     stylesTabButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
     vulnTabButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    stylesV2TabButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 end)
 
 vulnTabButton.MouseButton1Click:Connect(function()
     stylesTab.Visible = false
     vulnTab.Visible = true
+    stylesV2Tab.Visible = false
     stylesTabButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
     vulnTabButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    stylesV2TabButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+end)
+
+stylesV2TabButton.MouseButton1Click:Connect(function()
+    stylesTab.Visible = false
+    vulnTab.Visible = false
+    stylesV2Tab.Visible = true
+    stylesTabButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    vulnTabButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    stylesV2TabButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 end)
 
 -- Toggle UI
