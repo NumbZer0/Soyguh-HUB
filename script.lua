@@ -129,7 +129,7 @@ title.BackgroundTransparency = 1
 title.Font = Enum.Font.GothamBold
 title.TextSize = 24
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
-title.Text = "soyguhMOD"
+title.Text = "Emperor Hub"
 title.TextXAlignment = Enum.TextXAlignment.Left
 title.ZIndex = 2
 
