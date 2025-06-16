@@ -10,7 +10,7 @@ if oldGui then oldGui:Destroy() end
 
 -- ScreenGui
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "soyguhMOD"
+screenGui.Name = "Emperor Hub"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = PlayerGui
 
