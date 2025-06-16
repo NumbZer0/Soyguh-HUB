@@ -5,7 +5,7 @@ local LocalPlayer = Players.LocalPlayer
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
 -- Remove UI antiga
-local oldGui = PlayerGui:FindFirstChild("soyguhMOD")
+local oldGui = PlayerGui:FindFirstChild("Emperor Hub")
 if oldGui then oldGui:Destroy() end
 
 -- ScreenGui
