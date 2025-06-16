@@ -152,26 +152,26 @@ local stylesTabButton = Instance.new("TextButton")
 stylesTabButton.Parent = tabButtons
 stylesTabButton.Size = UDim2.new(0.33, -5, 1, 0)
 stylesTabButton.Position = UDim2.new(0, 0, 0, 0)
-stylesTabButton.Text = "Estilos/👾"
+stylesTabButton.Text = "Estilos"
 stylesTabButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 stylesTabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 stylesTabButton.Font = Enum.Font.GothamBold
 stylesTabButton.TextSize = 18
 Instance.new("UICorner", stylesTabButton).CornerRadius = UDim.new(0, 15)
 
-local vulnTabButton = stylesTabButton:Clone()
-vulnTabButton.Parent = tabButtons
-vulnTabButton.Position = UDim2.new(0.33, 5, 0, 0)
-vulnTabButton.Text = "Jogador/👤"
-local vulnUICorner = vulnTabButton:FindFirstChildWhichIsA("UICorner")
-if vulnUICorner then vulnUICorner.CornerRadius = UDim.new(0, 15) end
-
 local stylesV2TabButton = stylesTabButton:Clone()
 stylesV2TabButton.Parent = tabButtons
 stylesV2TabButton.Position = UDim2.new(0.66, 10, 0, 0)
-stylesV2TabButton.Text = "Estilos V2/👾"
+stylesV2TabButton.Text = "Estilos V2"
 local stylesV2UICorner = stylesV2TabButton:FindFirstChildWhichIsA("UICorner")
 if stylesV2UICorner then stylesV2UICorner.CornerRadius = UDim.new(0, 15) end
+
+local vulnTabButton = stylesTabButton:Clone()
+vulnTabButton.Parent = tabButtons
+vulnTabButton.Position = UDim2.new(0.33, 5, 0, 0)
+vulnTabButton.Text = "Jogador"
+local vulnUICorner = vulnTabButton:FindFirstChildWhichIsA("UICorner")
+if vulnUICorner then vulnUICorner.CornerRadius = UDim.new(0, 15) end
 
 -- Styles Tab
 local stylesTab = Instance.new("Frame")
