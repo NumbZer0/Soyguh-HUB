@@ -142,7 +142,6 @@ createStyleButton("Aiku", "Aiku", 2, 1)
 createStyleButton("Sae", "Sae", 2, 2)
 createStyleButton("Rin", "NEL Rin", 3, 1)
 createStyleButton("Don Lorenzo", "Don Lorenzo", 3, 2)
-createStyleV2Button("Shidou", "Shidou", 3, 2)
 
 -- Styles V2 Tab
 local stylesV2Tab = Instance.new("Frame")
